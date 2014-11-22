@@ -27,8 +27,12 @@ angular.module('app', [])
         };
 
         $scope.keyboard = function ($event) {
+            console.log($event.keyCode);
             $timeout(function () {
-                var match = { '38': 'Up', '37': 'Left', '39': 'Right', '40': 'Down'};
+                var match = {
+                    '38': 'Up', '37': 'Left', '39': 'Right', '40': 'Down',
+                    '70': 'Flap', '68': 'Dive', '82': 'Rise'
+                };
                 var buttonId = match[$event.keyCode];
                 if (buttonId) {
                     var button = $('#' + buttonId);
