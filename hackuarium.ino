@@ -40,7 +40,7 @@ void setup()
 
 
 void testLoop() {
-      Serial.print("UP...");
+    Serial.print("UP...");
     fishes[0]->command(UP, 100);
     Serial.println(" ...done!");
     
