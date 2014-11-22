@@ -1,0 +1,80 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Fish</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.min.js"></script>
+    <script type="application/javascript" src="main.js"></script>
+
+    <style>
+        body {
+        }
+        .fishes {
+            /*float:left;*/
+            list-style-type:none;
+        }
+        .fishes > li {
+            float:left;
+            font-size: 18px;
+            border: 1px solid dodgerblue;
+            padding: 5px 15px 5px 15px;
+            margin-right:15px;
+            cursor: pointer;
+        }
+        .fishes > li.selected {
+            background-color: dodgerblue;
+            color: white;
+            cursor: default;
+
+        }
+        .remote {
+            clear:left;
+            float:left;
+        }
+        .remote button {
+            font-size: 30px;
+            font-weight: bold;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body ng-controller="MainCtrl" ng-keydown="keyboard($event)">
+    <ul class="fishes">
+        <li ng-repeat="fishIndex in fishes"
+            ng-class="{ 'selected': currentFish === fishIndex}"
+            ng-click="selectFish(fishIndex)">
+            Fish {{ fishIndex }}
+        </li>
+    </ul>
+
+    <br>
+
+    <div>
+        Duration: <input type="text" ng-model="currentDuration">
+    </div>
+
+    <br>
+    <div class="remote">
+        <table>
+            <tr>
+                <td></td><td>
+                <button id="Up" ng-click="command(0)">↑</button></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><button id="Left" ng-click="command(2)">←</button></td>
+                <td></td>
+                <td><button id="Right" ng-click="command(3)">→</button></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button id="Down" ng-click="command(4)">↓</button></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
