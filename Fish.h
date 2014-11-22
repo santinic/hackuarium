@@ -22,6 +22,8 @@ class Fish
     void flap() const;
     void dive() const;
     void rise() const;
+    
+    void forward(unsigned long duration) const;
 };
 
 
@@ -76,3 +78,10 @@ void Fish::rise() const {
 }
 
 
+void Fish::forward(unsigned long duration) const {
+  unsigned long timeStart = millis();
+  do {
+    flap();
+    delay(40);
+  } while (millis() <= timeStart + duration);
+}
