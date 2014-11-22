@@ -5,6 +5,7 @@ angular.module('app', [])
         $scope.fishes = [0,1];
         $scope.currentFish = 0;
         $scope.currentDuration = 500;
+        $scope.actions = ['Flap', 'Forward', 'Dive', 'Rise'];
 
         $scope.selectFish = function(index){
             $scope.currentFish = index;
@@ -19,6 +20,11 @@ angular.module('app', [])
                 .error(function(data, status, headers) {
                     console.error(url, data);
                 });
+        };
+
+        $scope.action = function(act) {
+            var url = '/arduino/fish-action/'+$scope.currentFish+'/'+act;
+            $http.get(url);
         };
 
         $scope.keyboard = function($event) {
