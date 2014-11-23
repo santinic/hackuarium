@@ -22,7 +22,7 @@ angular.module('app', [])
         };
 
         $scope.keyboard = function ($event) {
-            console.log($event.keyCode);
+            //console.log($event.keyCode);
             $timeout(function () {
                 var match = {
                     '38': 'Up', '37': 'Left', '39': 'Right', '40': 'Down',
@@ -45,10 +45,10 @@ angular.module('app', [])
 
         function replaceWebcamImg() {
             var nextImg = ($scope.currentImg + 1) % 2;
-            console.log('current', $scope.currentImg + ', loading #webcam'+nextImg);
+            //console.log('current', $scope.currentImg + ', loading #webcam'+nextImg);
 
             $('#webcam'+nextImg).unbind().attr('src', src).load(function() {
-                console.log('loaded!!!')
+                //console.log('loaded!')
                 $scope.currentImg = nextImg;
                 $scope.$digest();
                 replaceWebcamImg();
