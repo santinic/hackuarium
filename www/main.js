@@ -5,6 +5,7 @@ angular.module('app', [])
         $scope.currentFish = 0;
         $scope.currentDuration = 500;
         $scope.actions = ['Flap', 'Forward', 'Dive', 'Rise'];
+        $scope.showWebcam = true;
 
         $scope.selectFish = function (index) {
             $scope.currentFish = index;
@@ -12,13 +13,7 @@ angular.module('app', [])
 
         $scope.command = function (cmd) {
             var url = '/arduino/fish-cmd/' + $scope.currentFish + '/' + cmd + '/' + $scope.currentDuration;
-            $http.get(url)
-                .success(function (data, status, headers) {
-                    console.log(url + ' callback');
-                })
-                .error(function (data, status, headers) {
-                    console.error(url, data);
-                });
+            $http.get(url);
         };
 
         $scope.action = function (act) {
@@ -43,5 +38,22 @@ angular.module('app', [])
                 }
             })
         };
+    })
+    .controller('WebcamCtrl', function ($scope) {
+        $scope.currentImg = 0;
+        var src = "https://london.hackspace.org.uk/members/camera.php?id=19";
+
+        function replaceWebcamImg() {
+            var nextImg = ($scope.currentImg + 1) % 2;
+            console.log('current', $scope.currentImg + ', loading #webcam'+nextImg);
+
+            $('#webcam'+nextImg).unbind().attr('src', src).load(function() {
+                console.log('loaded!!!')
+                $scope.currentImg = nextImg;
+                $scope.$digest();
+                replaceWebcamImg();
+            });
+        }
+        replaceWebcamImg();
 
     });
