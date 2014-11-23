@@ -9,54 +9,83 @@
     <script type="application/javascript" src="main.js"></script>
 
     <style>
-        body > div {
+        .left > div {
             margin: 20px 0 20px 0;
         }
-        .fishes {
-            list-style-type:none;
-            padding:0;
-        }
-        .fishes > li {
-            float:left;
-            font-size: 18px;
-            border: 1px solid dodgerblue;
-            padding: 5px 15px 5px 15px;
-            margin-right:15px;
-            cursor: pointer;
-        }
-        .fishes > li.selected {
-            background-color: dodgerblue;
-            color: white;
-            cursor: default;
-        }
-        .duration {
-            clear:left;
+
+        .left {
             float:left;
         }
-        .remote {
-            clear:left;
+
+            .fishes {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .fishes > li {
+                float: left;
+                font-size: 18px;
+                border: 1px solid dodgerblue;
+                padding: 5px 15px 5px 15px;
+                margin-right: 15px;
+                cursor: pointer;
+            }
+
+            .fishes > li.selected {
+                background-color: dodgerblue;
+                color: white;
+                cursor: default;
+            }
+
+            .duration {
+                clear: left;
+                float: left;
+            }
+
+            .remote {
+                clear: left;
+                float: left;
+            }
+
+            .remote button {
+                font-size: 30px;
+                font-weight: bold;
+                width: 50px;
+                height: 50px;
+            }
+
+            .clicked {
+                border: 5px solid orangered;
+            }
+
+            .actions {
+                clear: left;
+            }
+
+            .actions > button {
+                margin-right: 10px;
+                font-size: 18px;
+            }
+
+        .right {
+            margin-top: 20px;
             float:left;
         }
-        .remote button {
-            font-size: 30px;
-            font-weight: bold;
-            width: 50px;
-            height: 50px;
-        }
-        .clicked {
-            border: 5px solid orangered;
-        }
-        .actions {
-            clear:left;
-        }
-        .actions > button {
-            margin-right: 10px;
-            font-size: 18px;
-        }
+
+            .webcams {
+                float: left;
+                clear: none;
+            }
+
+            .webcams > fieldset {
+                overflow: hidden;
+            }
     </style>
 </head>
 
 <body ng-controller="MainCtrl" ng-keydown="keyboard($event)">
+
+<div class="left">
     <ul class="fishes">
         <li ng-repeat="fishIndex in fishes"
             ng-class="{ 'selected': currentFish === fishIndex}"
@@ -72,18 +101,26 @@
     <div class="remote">
         <table>
             <tr>
-                <td></td><td>
-                <button id="Up" ng-click="command(0)">↑</button></td>
+                <td></td>
+                <td>
+                    <button id="Up" ng-click="command(0)">↑</button>
+                </td>
                 <td></td>
             </tr>
             <tr>
-                <td><button id="Left" ng-click="command(2)">←</button></td>
+                <td>
+                    <button id="Left" ng-click="command(2)">←</button>
+                </td>
                 <td></td>
-                <td><button id="Right" ng-click="command(3)">→</button></td>
+                <td>
+                    <button id="Right" ng-click="command(3)">→</button>
+                </td>
             </tr>
             <tr>
                 <td></td>
-                <td><button id="Down" ng-click="command(1)">↓</button></td>
+                <td>
+                    <button id="Down" ng-click="command(1)">↓</button>
+                </td>
                 <td></td>
             </tr>
         </table>
@@ -95,9 +132,22 @@
 
     <input type="checkbox" ng-model="showWebcam">
     Show webcam (must be logged on <a href="https://london.hackspace.org.uk/login.php">london.hackspace.org.uk</a>)<br/>
-    <div ng-controller="WebcamCtrl" ng-if="showWebcam">
-        <img ng-show="currentImg === 0" id="webcam0">
-        <img ng-show="currentImg === 1" id="webcam1">
+</div>
+
+<div ng-controller="WebcamCtrl" ng-if="showWebcam" class="right">
+    <div class="webcams">
+        <fieldset>
+            <input type="radio" ng-model="currentWebcam" value="19"/>Main Room<br/>
+            <input type="radio" ng-model="currentWebcam" value="18"/>Class Room<br/>
+            <input type="radio" ng-model="currentWebcam" value="14"/>Front Door<br/>
+            <input type="radio" ng-model="currentWebcam" value="13"/>Back Lobby<br/>
+            <input type="radio" ng-model="currentWebcam" value="10"/>Back Yard<br/>
+            <input type="radio" ng-model="currentWebcam" value="15"/>Back Gate<br/>
+        </fieldset>
     </div>
+    <img ng-show="currentImg === 0" id="webcam0">
+    <img ng-show="currentImg === 1" id="webcam1">
+</div>
+
 </body>
 </html>

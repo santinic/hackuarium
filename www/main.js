@@ -41,19 +41,18 @@ angular.module('app', [])
     })
     .controller('WebcamCtrl', function ($scope) {
         $scope.currentImg = 0;
-        var src = "https://london.hackspace.org.uk/members/camera.php?id=19";
+        $scope.currentWebcam = 19;
+        var srcBase = "https://london.hackspace.org.uk/members/camera.php?id=";
 
         function replaceWebcamImg() {
             var nextImg = ($scope.currentImg + 1) % 2;
-            //console.log('current', $scope.currentImg + ', loading #webcam'+nextImg);
+            var src = srcBase+$scope.currentWebcam;
 
             $('#webcam'+nextImg).unbind().attr('src', src).load(function() {
-                //console.log('loaded!')
                 $scope.currentImg = nextImg;
                 $scope.$digest();
                 replaceWebcamImg();
             });
         }
         replaceWebcamImg();
-
     });
