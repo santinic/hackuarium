@@ -93,7 +93,8 @@
         <button ng-repeat="a in actions" ng-click="action(a)" id="{{a}}">{{ a }}</button>
     </div>
 
-    <input type="checkbox" ng-model="showWebcam"> Show webcam (must be logged on london.hackerspace.org)<br/>
+    <input type="checkbox" ng-model="showWebcam">
+    Show webcam (must be logged on <a href="https://london.hackspace.org.uk/login.php">london.hackspace.org.uk</a>)<br/>
     <div ng-controller="WebcamCtrl" ng-if="showWebcam">
         <img ng-show="currentImg === 0" id="webcam0">
         <img ng-show="currentImg === 1" id="webcam1">
