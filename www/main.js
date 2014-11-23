@@ -17,7 +17,7 @@ angular.module('app', [])
         };
 
         $scope.action = function (act) {
-            var url = '/arduino/fish-action/' + $scope.currentFish + '/' + act;
+            var url = '/arduino/fish-action/' + $scope.currentFish + '/' + act.toLowerCase();
             $http.get(url);
         };
 
