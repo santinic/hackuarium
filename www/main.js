@@ -1,7 +1,7 @@
 angular.module('app', [])
     .controller('MainCtrl', function ($scope, $http, $timeout) {
 
-        $scope.fishes = [0, 1];
+        $scope.fishes = [0,1];
         $scope.currentFish = 0;
         $scope.currentDuration = 500;
         $scope.actions = ['Flap', 'Forward', 'Dive', 'Rise'];
@@ -17,7 +17,7 @@ angular.module('app', [])
         };
 
         $scope.action = function (act) {
-            var url = '/arduino/fish-action/' + $scope.currentFish + '/' + act.toLowerCase();
+            var url = '/arduino/fish-action/' + $scope.currentFish + '/' + act.toLowerCase() + '/' + $scope.currentDuration;
             $http.get(url);
         };
 

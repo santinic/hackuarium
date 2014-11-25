@@ -38,12 +38,16 @@ void fishAction(YunClient client) {
   // e.g. fish.local/arduino/fish-action/0/flap/
   int index;
   String actionName;
+  unsigned long duration;
   
   index = client.parseInt();
   if(client.read() == '/') {
-    actionName = client.readStringUntil('/'); // dovrebbe finire senza il /
+    actionName = client.readStringUntil('/');
+    duration = (long) client.parseInt();  
+    Serial.println(actionName);
+    Serial.println(duration);
     const Fish * fish = fishes[index];
-    fish->action(actionName);
+    fish->action(actionName, duration);
   }
 }
 

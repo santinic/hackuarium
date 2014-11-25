@@ -17,6 +17,11 @@ void setup()
 {
   //pinMode(3, OUTPUT);
   Serial.begin(9600);
+  Bridge.begin();
+  
+  server.listenOnLocalhost();
+  server.begin();
+  
   
   // Initialise fishes
   fishes[0] = new Fish(

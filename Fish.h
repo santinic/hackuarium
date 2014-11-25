@@ -14,7 +14,7 @@ class Fish
   public:
     Fish (unsigned int *up, unsigned int *down, unsigned int * left, unsigned int *right, unsigned int * stopC, unsigned int codeLen);
     void command (unsigned int cmd, unsigned long duration) const;
-    void action (String actionName) const;
+    void action (String actionName, unsigned long duration = 0) const;
     
   private:
     unsigned int * commands [5];
@@ -50,7 +50,7 @@ void Fish::command (unsigned int cmd, unsigned long duration) const
   delay(40);
 }
 
-void Fish::action(String name) const {
+void Fish::action(String name, unsigned long duration) const {
   if(name == "flap") {
     this->flap();
   }
@@ -59,6 +59,9 @@ void Fish::action(String name) const {
   }
   else if(name == "rise") {
     this->rise();
+  }
+  else if(name == "forward") {
+    this->forward(duration);
   }
 }
 
